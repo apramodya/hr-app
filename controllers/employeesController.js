@@ -14,7 +14,8 @@ const createNewEmployee = async (req, res) => {
     try {
         const result = await Employee.create({
             firstname: req.body.firstname,
-            lastname: req.body.lastname
+            lastname: req.body.lastname,
+            telephone: req.body.telephone
         });
 
         res.status(201).json(result);
@@ -34,6 +35,7 @@ const updateEmployee = async (req, res) => {
     }
     if (req.body?.firstname) employee.firstname = req.body.firstname;
     if (req.body?.lastname) employee.lastname = req.body.lastname;
+    if (req.body?.telephone) employee.telephone = req.body.telephone;
     const result = await employee.save();
     res.json(result);
 }

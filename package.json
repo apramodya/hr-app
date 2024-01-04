@@ -1,13 +1,13 @@
 {
-  "name": "15tut",
+  "name": "hr-app",
   "version": "1.0.0",
-  "description": "MongoDB tutorial",
+  "description": "CRUD application to handle a simple HR system",
   "main": "server.js",
   "scripts": {
     "start": "node server",
     "dev": "nodemon server"
   },
-  "author": "Dave Gray",
+  "author": "Pramodya",
   "license": "ISC",
   "engines": {
     "node": "18.x"

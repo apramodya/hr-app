@@ -9,6 +9,9 @@ const employeeSchema = new Schema({
     lastname: {
         type: String,
         required: true
+    },
+    telephone: {
+        type: String
     }
 });
 
