@@ -1,4 +1,5 @@
 const Item = require("../model/Item");
+const Employee = require("../model/Employee");
 
 const getAllItems = async (_, res) => {
   const items = await Item.find();
@@ -84,7 +85,15 @@ const assignItem = async (req, res) => {
       .status(404)
       .json({ message: `No item matches ID ${req.params.id}.` });
   }
-  if (req.body?.assignee) item.assignee = req.body.assignee;
+
+  const assignee = await Employee.findOne({ _id: req.body.assignee }).exec();
+  if (!assignee) {
+    return res
+      .status(404)
+      .json({ message: `No assignee matches ID ${req.body.assignee}.` });
+  }
+
+  if (req.body?.assignee) item.assigneeId = assignee;
   const result = await item.save();
   res.json(result);
 };
@@ -100,7 +109,7 @@ const unAssignItem = async (req, res) => {
       .status(404)
       .json({ message: `No item matches ID ${req.params.id}.` });
   }
-  item.assignee = null;
+  item.assigneeId = null;
   const result = await item.save();
   res.json(result);
 };
