@@ -20,8 +20,13 @@ const createNewItem = async (req, res) => {
     });
 
     res.status(201).json(result);
-  } catch (err) {
-    console.error(err);
+  } catch (error) {
+    if (error.code === 11000) {
+      let errMsg = Object.keys(error.keyValue)[0] + " already exists.";
+      res.status(500).json({ message: errMsg });
+    } else {
+      res.status(500).json(error);
+    }
   }
 };
 
@@ -39,7 +44,6 @@ const updateItem = async (req, res) => {
   if (req.body?.code) item.code = req.body.code;
   if (req.body?.name) item.name = req.body.name;
   if (req.body?.description) item.description = req.body.description;
-  if (req.body?.assignee) item.assignee = req.body.assignee;
   const result = await item.save();
   res.json(result);
 };
