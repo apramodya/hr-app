@@ -84,7 +84,9 @@ const getAllItems = async (req, res) => {
       .json({ message: `No employee matches ID ${req.params.id}.` });
   }
 
-  const items = await Item.find({ assignee: req.params.id });
+  const items = await Item.find({ assignee: req.params.id }).populate(
+    "assignee"
+  );
   if (!items) return res.status(404).json({ message: "No items found." });
   res.json(items);
 };

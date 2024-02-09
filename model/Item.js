@@ -15,9 +15,9 @@ const itemSchema = new Schema({
   description: {
     type: String,
   },
-  assigneeId: {
+  assignee: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
+    ref: "Employee",
   },
 });
 
